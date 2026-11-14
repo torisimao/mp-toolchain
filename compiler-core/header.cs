@@ -580,7 +580,7 @@ namespace Prorigh.Compiler
             "function Tan(abc1){return Math.tan(abc1);}\n",
 
             "function TextToDecimal(abc1){return parseFloat(abc1.join(\"\"));}\n",
-            "function DecimalToText(abc1){return abc1.toString().split(\"\");}\n",
+            "function DecimalToText(abc1){return (new Intl.NumberFormat(\"en-US\", { useGrouping: false, notation: \"standard\", maximumFractionDigits: 16 }).format(abc1)).split(\"\");}\n",
 
             "function EvenRound(abc1) {const abc2 = Math.floor(abc1);const abc3 = abc1 - abc2;\nif (diff < 0.5) return abc2;\nif (diff > 0.5) return (abc2 + 1);\nreturn ((abc2 % 2) === 0) ? abc2 : (abc2 + 1);}\n",
             "function Floor(abc1){return Math.floor(abc1);}\n",
