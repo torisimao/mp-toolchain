@@ -1987,7 +1987,7 @@ namespace Prorigh.Compiler
         {
             if (v.type is VarType.Type or VarType.Number) return v.value;
             else if (v.type is VarType.Boolean) return (v.value is "true" ? "1" : "0");
-            else if (v.type is VarType.Decimal) return AsmDecimal(v.value)
+            else if (v.type is VarType.Decimal) return AsmDecimal(v.value);
             else if (v.type is VarType.Char) return Item.BitChanger.ToUInt32(Pcom_dat.utf32_encode.GetBytes(v.value), Item.ByteOrder.LittleEndian).ToString();
             else if (v.type is VarType.String)
             {
