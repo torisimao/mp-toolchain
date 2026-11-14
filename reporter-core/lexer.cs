@@ -379,8 +379,6 @@ namespace Prorigh.Reporter
                     _error = 0x203;
                     return NullToken;
                 }
-
-                text = "0x" + BitConverter.ToString(BitChanger.ToBytes(_uu, ByteOrder.BigEndian)).Replace("-", "");
             }
             else
             {
