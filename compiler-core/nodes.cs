@@ -279,10 +279,7 @@ namespace Prorigh.Compiler
 
                 if (type is VarType.Type or VarType.Number or VarType.Decimal) ui.Append(value);
                 else if (type is VarType.Boolean) ui.Append(value is "true" ? "1" : "0");
-                else if (type is VarType.Decimal)
-                {
-                    ui.Append(value);
-                }
+                else if (type is VarType.Decimal) ui.Append(Pcom_dat.AsmDecimal(value));
                 else if (type is VarType.Char) ui.Append(Item.BitChanger.ToUInt32(Pcom_dat.utf32_encode.GetBytes(value), Item.ByteOrder.LittleEndian).ToString());
                 else throw new Exception();
 
@@ -1990,7 +1987,7 @@ namespace Prorigh.Compiler
         {
             if (v.type is VarType.Type or VarType.Number) return v.value;
             else if (v.type is VarType.Boolean) return (v.value is "true" ? "1" : "0");
-            else if (v.type is VarType.Decimal) return "__float64_(" + v.value + ")";
+            else if (v.type is VarType.Decimal) return AsmDecimal(v.value)
             else if (v.type is VarType.Char) return Item.BitChanger.ToUInt32(Pcom_dat.utf32_encode.GetBytes(v.value), Item.ByteOrder.LittleEndian).ToString();
             else if (v.type is VarType.String)
             {
@@ -2008,6 +2005,16 @@ namespace Prorigh.Compiler
                 return sg.ToString();
             }
             else throw new Exception();
+        }
+
+        public static string AsmDecimal(string h)
+        {
+            double _uu = 0;
+            if (!double.TryParse(h, out _uu))
+            {
+                throw new Exception("Invalid arge by using in not expected situations");
+            }
+            return "0x" + BitConverter.ToString(BitChanger.ToBytes(_uu, ByteOrder.BigEndian)).Replace("-", "");
         }
 
 
